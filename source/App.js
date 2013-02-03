@@ -3,6 +3,7 @@ enyo.kind({
 	kind: "FittableRows",
 	fit: true,
 	components:[
+        {kind: "Signals", ondeviceready: "deviceready"},
 		{kind: "onyx.Toolbar", content: "Hello World"},
 		{kind: "enyo.Scroller", fit: true, components: [
 			{name: "main", classes: "nice-padding", allowHtml: true}
@@ -11,7 +12,7 @@ enyo.kind({
 			{kind: "onyx.Button", content: "Tap me", ontap: "helloWorldTap"}
 		]}
 	],
-	helloWorldTap: function(inSender, inEvent) {
+	helloWorldTap: function (inSender, inEvent) {
 		this.$.main.addContent("The button was tapped.<br/>");
 	}
 });
