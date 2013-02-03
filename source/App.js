@@ -2,17 +2,34 @@ enyo.kind({
 	name: "App",
 	kind: "FittableRows",
 	fit: true,
-	components:[
+	components: [
         {kind: "Signals", ondeviceready: "deviceready"},
-		{kind: "onyx.Toolbar", content: "Hello World"},
-		{kind: "enyo.Scroller", fit: true, components: [
-			{name: "main", classes: "nice-padding", allowHtml: true}
-		]},
-		{kind: "onyx.Toolbar", components: [
-			{kind: "onyx.Button", content: "Tap me", ontap: "helloWorldTap"}
+        {kind: "onyx.Toolbar", content: "Documents"},
+		{kind: "enyo.Panels", fit: true, components: [
+            {
+                kind: "enyo.FittableRows",
+                components: [
+			        {name: "documentList", content: "TODO", fit: true},
+                    {kind: "onyx.Toolbar", components: [
+                        {kind: "onyx.Button", content: "Add", ontap: "addDocumentTap"},
+                        {kind: "onyx.Button", content: "Delete", ontap: "deleteDocumentTap"}
+                    ]}
+                ]
+            },
+            {
+                kind: "enyo.FittableRows",
+                components: [
+			        {name: "revisionList", content: "TODO", fit: true},
+                    {kind: "onyx.Toolbar", components: [
+                    ]}
+                ]
+            }
 		]}
 	],
-	helloWorldTap: function (inSender, inEvent) {
-		this.$.main.addContent("The button was tapped.<br/>");
+	addDocumentTap: function (inSender, inEvent) {
+        console.log("TODO");
+	},
+	deleteDocumentTap: function (inSender, inEvent) {
+        console.log("TODO");
 	}
 });
