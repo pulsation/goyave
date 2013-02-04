@@ -2,7 +2,7 @@ enyo.kind({
     kind: "enyo.FittableRows",
     name: "DocumentListLayout",
     events: {
-        "onSettingsPanel": ""
+        "onShowSettingsPanel": ""
     },
     components: [
         {kind: "onyx.Toolbar", layoutKind: "FittableColumnsLayout", components: [
@@ -17,6 +17,6 @@ enyo.kind({
         ]}
     ],
     settingsTap: function (inSender, inEvent) {
-        this.doSettingsPanel();
+        this.doShowSettingsPanel();
     }
 });

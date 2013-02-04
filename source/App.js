@@ -3,7 +3,8 @@ enyo.kind({
 	kind: "FittableRows",
 	fit: true,
     handlers: {
-        "onSettingsPanel": "toSettingsPanel"
+        "onShowSettingsPanel": "toSettingsPanel",
+        "onShowDocumentPanel": "toDocumentPanel"
     },
 	components: [
         {kind: "Signals", ondeviceready: "deviceready"},
@@ -13,10 +14,17 @@ enyo.kind({
             components: [
                 { kind: "DocumentPanels" },
                 { kind: "SettingsLayout" }
-	        ]
+	        ],
+            indexes: {
+                DOCUMENTS: 0,
+                SETTINGS: 1
+            }
         }
     ],
     toSettingsPanel: function (inSender, inEvent) {
-        this.$.panels.next();
+        this.$.panels.setIndex(this.$.panels.indexes.SETTINGS);
+    },
+    toDocumentPanel: function (inSender, inEvent) {
+        this.$.panels.setIndex(this.$.panels.indexes.DOCUMENTS);
     }
 });
