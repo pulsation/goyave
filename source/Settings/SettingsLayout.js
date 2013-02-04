@@ -30,5 +30,13 @@ enyo.kind({
     ],
     saveTap: function (inSender, inEvent) {
         this.doShowDocumentPanel();
+    },
+    create: function () {
+        this.inherited(arguments);
+        // TODO: This is only a test.
+        goyave.Settings.fetchCouchDBUrl().fail(function (err) {
+            console.log("FIXME");
+            console.log(err);
+        });
     }
 });
