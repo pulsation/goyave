@@ -1,10 +1,13 @@
 enyo.kind({
     kind: "enyo.FittableRows",
     name: "DocumentListLayout",
+    events: {
+        "onSettingsPanel": ""
+    },
     components: [
         {kind: "onyx.Toolbar", layoutKind: "FittableColumnsLayout", components: [
             {content: "Documents", fit: true},
-            {kind: "onyx.Button", content: "Setup", ontap: "setupTap"}
+            {kind: "onyx.Button", content: "Settings", ontap: "settingsTap"}
         ]},
         {name: "documentList", kind: "enyo.List", fit: true},
         {kind: "onyx.Toolbar", components: [
@@ -12,5 +15,8 @@ enyo.kind({
             {kind: "onyx.Button", content: "Add", ontap: "addDocumentTap"},
             {kind: "onyx.Button", content: "Delete", ontap: "deleteDocumentTap"}
         ]}
-    ]
+    ],
+    settingsTap: function (inSender, inEvent) {
+        this.doSettingsPanel();
+    }
 });
