@@ -13,7 +13,7 @@ enyo.kind({
                     kind: "enyo.FittableRows",
                     components: [
                         {kind: "onyx.Toolbar", layoutKind: "FittableColumnsLayout", components: [
-                            {content: "Documents", style: "height: 27px;", fit: true},
+                            {content: "Documents", fit: true},
                             {kind: "onyx.Button", content: "Setup", ontap: "setupTap"}
                         ]},
                         {name: "documentList", kind: "enyo.List", fit: true},
