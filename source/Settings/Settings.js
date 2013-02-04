@@ -5,7 +5,7 @@ goyave.Settings = (function () {
         spawnDB : function () {
             var dfd = _.Deferred();
 
-            Pouch('idb://settings', function (err, db) {
+            Pouch('websql://settings', function (err, db) {
                 return dfd.resolve(db);
             });
             return dfd.promise();
