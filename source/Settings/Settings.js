@@ -14,11 +14,7 @@ goyave.Settings = (function () {
                 if (err !== null) {
                     dfd.reject(err);
                 }
-                /*
-                _settings = response;
-                console.log("DEBUG response:");
-                console.log(_settings);
-                */
+                _settings._rev = response.rev;
                 return dfd.resolve(response);
             });
         },
@@ -28,7 +24,6 @@ goyave.Settings = (function () {
                 if (err !== null) {
                     if (err.reason === "missing") {
                         _settings = _defaultSettings;
-                        console.log("DEBUG _save called from _fetch.");
                         _save(dfd, db);
                         return dfd.resolve(_settings);
                     }

@@ -40,7 +40,8 @@ enyo.kind({
 
     saveTap: function (/* inSender, inEvent */) {
         var self = this;
-
+        
+        this.settings.couchDbUrl = this.$.couchDbUrl.getValue();
         this.settings.save().then(function (response) {
             self.doShowDocumentPanel();
         }).fail(function (err) {
