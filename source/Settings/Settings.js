@@ -7,6 +7,10 @@ goyave.Settings = (function () {
             couchDbUrl : "http://localhost/pouch_test"
         },
 
+        _oldSettings = {},
+
+        _modified = false,
+
         _settings = null,
 
         _save = function (dfd, db) {
@@ -56,10 +60,14 @@ goyave.Settings = (function () {
 
             save: function () {
                 var dfd = _.Deferred();
-
-                this.spawnDB().then(function (db) {
-                    return _save(dfd, db);
-                });
+                
+                if (_modified) {
+                    this.spawnDB().then(function (db) {
+                        return _save(dfd, db);
+                    });
+                } else {
+                    return dfd.resolve(null);
+                }
                 return dfd.promise();
             },
 
@@ -68,7 +76,10 @@ goyave.Settings = (function () {
             },
 
             set couchDbUrl(url) {
-                _settings.couchDbUrl = url;
+                if (url !== _settings.couchDbUrl) {
+                    _settings.couchDbUrl = url;
+                    _modified            = true;
+                }
             }
 
         };
