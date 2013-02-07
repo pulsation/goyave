@@ -14,6 +14,11 @@ goyave.Settings = (function () {
                 if (err !== null) {
                     dfd.reject(err);
                 }
+                /*
+                _settings = response;
+                console.log("DEBUG response:");
+                console.log(_settings);
+                */
                 return dfd.resolve(response);
             });
         },
@@ -21,16 +26,16 @@ goyave.Settings = (function () {
         _fetch = function (dfd, db) {
             db.get("settings", function (err, response) {
                 if (err !== null) {
-                    console.log(err);
                     if (err.reason === "missing") {
                         _settings = _defaultSettings;
+                        console.log("DEBUG _save called from _fetch.");
                         _save(dfd, db);
                         return dfd.resolve(_settings);
                     }
                     dfd.reject(err);
                 }
                 _settings = response;
-                return dfd.resolve(response);
+                return dfd.resolve(_that);
             });
         },
 
@@ -61,6 +66,14 @@ goyave.Settings = (function () {
                     return _save(dfd, db);
                 });
                 return dfd.promise();
+            },
+
+            get couchDbUrl() {
+                return _settings.couchDbUrl;
+            },
+
+            set couchDbUrl(url) {
+                _settings.couchDbUrl = url;
             }
 
         };

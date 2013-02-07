@@ -39,8 +39,15 @@ enyo.kind({
     },
 
     saveTap: function (/* inSender, inEvent */) {
+        var self = this;
 
-        this.doShowDocumentPanel();
+        this.settings.save().then(function (response) {
+            self.doShowDocumentPanel();
+        }).fail(function (err) {
+            console.log("FIXME:");
+            console.log(err);
+            alert("Could not save settings.");
+        });
     },
     create: function () {
         var that = this;
@@ -54,7 +61,7 @@ enyo.kind({
             that.setSettings(settings);
 
         }).fail(function (err) {
-            console.log("FIXME");
+            console.log("FIXME:");
             console.log(err);
         });
     }
