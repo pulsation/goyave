@@ -25,16 +25,18 @@ enyo.kind({
             kind: "onyx.Toolbar",
             components: [
                 { kind: "onyx.Button", content: "Save", ontap: "saveTap" }
-            ],
-        },
+            ]
+        }
     ],
     saveTap: function (inSender, inEvent) {
+        var oto;
+
         this.doShowDocumentPanel();
     },
     create: function () {
         this.inherited(arguments);
         // TODO: This is only a test.
-        goyave.Settings.fetchCouchDBUrl().fail(function (err) {
+        goyave.Settings.fetch().fail(function (err) {
             console.log("FIXME");
             console.log(err);
         });

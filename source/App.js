@@ -14,7 +14,7 @@ enyo.kind({
             components: [
                 { kind: "DocumentPanels" },
                 { kind: "SettingsLayout" }
-	        ],
+            ],
             indexes: {
                 DOCUMENTS: 0,
                 SETTINGS: 1
