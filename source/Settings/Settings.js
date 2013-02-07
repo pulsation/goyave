@@ -7,7 +7,7 @@ goyave.Settings = (function () {
             couchDbUrl : "http://localhost/pouch_test"
         },
 
-        _oldSettings = {},
+        _fetched  = false,
 
         _modified = false,
 
@@ -21,6 +21,7 @@ goyave.Settings = (function () {
                 _settings._rev = response.rev;
                 return dfd.resolve(response);
             });
+            return dfd.promise();
         },
 
         _fetch = function (dfd, db) {
@@ -36,6 +37,7 @@ goyave.Settings = (function () {
                 _settings = response;
                 return dfd.resolve(_that);
             });
+            return dfd.promise();
         },
 
         _that = {
@@ -49,16 +51,18 @@ goyave.Settings = (function () {
             },
 
             fetch : function () {
-                // TODO: Should be refactored to get all values.
                 var dfd = _.Deferred();
 
+                if (_fetched) {
+                    return dfd.resolve(this);
+                }
                 this.spawnDB().then(function (db) {
                     return _fetch(dfd, db);
                 });
                 return dfd.promise();
             },
 
-            save: function () {
+            save : function () {
                 var dfd = _.Deferred();
                 
                 if (_modified) {
