@@ -4,6 +4,11 @@ enyo.kind({
     events: {
         "onShowDocumentPanel": ""
     },
+
+    published: {
+        settings: null
+    },
+
     components: [
         { kind: "onyx.Toolbar", content: "Settings" },
         { kind: "enyo.Scroller", fit: true, components: [
@@ -15,7 +20,7 @@ enyo.kind({
                     {
                         kind: "onyx.InputDecorator",
                         components: [
-                            { kind: "onyx.Input", placeholder: "URL" }
+                            { kind: "onyx.Input", placeholder: "URL", name: "couchDbUrl" }
                         ]
                     }
                 ]
@@ -28,15 +33,27 @@ enyo.kind({
             ]
         }
     ],
-    saveTap: function (inSender, inEvent) {
-        var oto;
+
+    settingsChanged: function (/* inOldValue */) {
+        this.$.couchDbUrl.setValue(this.settings.couchDbUrl);
+    },
+
+    saveTap: function (/* inSender, inEvent */) {
 
         this.doShowDocumentPanel();
     },
     create: function () {
+        var that = this;
+
         this.inherited(arguments);
+
+        // Fill form content
+
         // TODO: This is only a test.
-        goyave.Settings.fetch().fail(function (err) {
+        goyave.Settings.fetch().then(function (settings) {
+            that.setSettings(settings);
+
+        }).fail(function (err) {
             console.log("FIXME");
             console.log(err);
         });
