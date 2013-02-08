@@ -16,7 +16,12 @@ enyo.kind({
             {kind: "onyx.Button", content: "Delete", ontap: "deleteDocumentTap"}
         ]}
     ],
-    settingsTap: function (inSender, inEvent) {
+
+    settingsTap: function (/* inSender, inEvent */) {
         this.doShowSettingsPanel();
+    },
+
+    addTap: function () {
+        console.log("TODO");
     }
 });
